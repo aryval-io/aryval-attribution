@@ -1,4 +1,4 @@
-
+getAttributionData();
 function getAttributionData(){
   let storedAtt = getStoredAttData();
   //we have stored data for attribution and it is not expired
