@@ -43,7 +43,7 @@ function getAttributionData(){
   }
   else if(params.get('msclkid') || params.get('gclid') ||
      hasPaidSearchWords(utm_source) || hasPaidSearchWords(utm_medium) || hasPaidSearchWords(utm_campaign)
-     ((utm_source || utm_medium || utm_term) && searchs.includes(referrer))
+     ((utm_source || utm_medium || utm_term) && searchs.includes(referrerDomain))
     ){
     channel = "Paid Search";
   }
@@ -93,15 +93,15 @@ function getAttributionData(){
 }
 
 function isPaidSocial(term){
-  return term && (term.toLowerCase().includes('paidsocial'));
+  return term != undefined && term != null && (term.toLowerCase().includes('paidsocial'));
 }
 
 function isPaidMedium(term){
-  return term && (term.toLowerCase().includes('paid')|| term.toLowerCase().includes('ppc')|| term.toLowerCase().includes('cpc'));
+  return term != undefined && term != null && (term.toLowerCase().includes('paid')|| term.toLowerCase().includes('ppc')|| term.toLowerCase().includes('cpc'));
 }
 
 function hasPaidSearchWords(term){
-  return term && (term.toLowerCase().includes('cpc')||term.toLowerCase().includes('ppc')||term.toLowerCase().includes('adwords')||term.toLowerCase().includes('paidsearch'));
+  return term != undefined && term != null && (term.toLowerCase().includes('cpc')||term.toLowerCase().includes('ppc')||term.toLowerCase().includes('adwords')||term.toLowerCase().includes('paidsearch'));
 }
 
 function getStoredAttData(){
