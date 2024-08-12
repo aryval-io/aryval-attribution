@@ -33,11 +33,11 @@ function getAttributionData(){
   var channeldrilldown2 = utm_campaign;
   var channeldrilldown3 = utm_term;
 
-  if(utm_medium && utm_medium.includes("email")){
+  if(utm_medium && utm_medium.toLowerCase.includes("email")){
     channel = 'Email Marketing';
   }
-  else if(utm_source == 'paidsocial' || 
-     (utm_medium && (utm_medium.includes('paid')|| utm_medium.includes('ppc')|| utm_medium.includes('cpc')) 
+  else if(utm_source.toLowerCase.includes('paidsocial') || 
+     (utm_medium && (utm_medium.toLowerCase.includes('paid')|| utm_medium.toLowerCase.includes('ppc')|| utm_medium.toLowerCase.includes('cpc')) 
        && 
         (socials.includes(utm_source) || socials.includes(referrerName)))){
     channel = 'Paid Social';
@@ -48,10 +48,10 @@ function getAttributionData(){
     ){
     channel = "Paid Search";
   }
-  else if(utm_medium && utm_medium.includes('display')){
+  else if(utm_medium && utm_medium.toLowerCase.includes('display')){
     channel = "Display";
   }
-  else if(utm_medium && utm_medium.includes('affiliate')){
+  else if(utm_medium && utm_medium.toLowerCase.includes('affiliate')){
     channel = "Affiliates";
   }
   else if(utm_medium || utm_source || utm_campaign || params.get('source')){
@@ -94,7 +94,7 @@ function getAttributionData(){
 }
 
 function hasPaidSearchWords(term){
-  return term && (term.includes('cpc')||term.includes('ppc')||term.includes('adwords')||term.includes('paidsearch'));
+  return term && (term.toLowerCase.includes('cpc')||term.toLowerCase.includes('ppc')||term.toLowerCase.includes('adwords')||term.toLowerCase.includes('paidsearch'));
 }
 
 function getStoredAttData(){
