@@ -36,15 +36,14 @@ function getAttributionData(){
   if(utm_medium && utm_medium.toLowerCase().includes("email")){
     channel = 'Email Marketing';
   }
-  else if(utm_source.toLowerCase().includes('paidsocial') || 
-     (utm_medium && (utm_medium.toLowerCase().includes('paid')|| utm_medium.toLowerCase().includes('ppc')|| utm_medium.toLowerCase().includes('cpc')) 
-       && 
-        (socials.includes(utm_source) || socials.includes(referrerName)))){
+  else if(isPaidSocial(utm_source) || isPaidSocial(utm_medium) || 
+     (isPaidMedium(utm_medium) && (socials.includes(utm_source) || socials.includes(referrerName)))
+    ){
     channel = 'Paid Social';
   }
   else if(params.get('msclkid') || params.get('gclid') ||
      hasPaidSearchWords(utm_source) || hasPaidSearchWords(utm_medium) || hasPaidSearchWords(utm_campaign)
-     (utm_source || utm_medium || utm_term && searchs.includes(referrer))
+     ((utm_source || utm_medium || utm_term) && searchs.includes(referrer))
     ){
     channel = "Paid Search";
   }
@@ -91,6 +90,14 @@ function getAttributionData(){
   localStorage.setItem("aryval-attribution", btoa(attData));
 
   return jsonAtt;
+}
+
+function isPaidSocial(term){
+  return term && (term.toLowerCase().includes('paidsocial'));
+}
+
+function isPaidMedium(term){
+  return term && (term.toLowerCase().includes('paid')|| term.toLowerCase().includes('ppc')|| term.toLowerCase().includes('cpc'));
 }
 
 function hasPaidSearchWords(term){
