@@ -42,7 +42,8 @@ function getAttributionData(){
         (socials.includes(utm_source) || socials.includes(referrerName)))){
     channel = 'Paid Social';
   }
-  else if(params.get('msclkid') || params.get('gclid') || utm_source == 'paidsearch' || utm_medium == 'paidsearch' || 
+  else if(params.get('msclkid') || params.get('gclid') ||
+     hasPaidSearchWords(utm_source) || hasPaidSearchWords(utm_medium) || hasPaidSearchWords(utm_campaign)
      (utm_source || utm_medium || utm_term && searchs.includes(referrer))
     ){
     channel = "Paid Search";
@@ -90,6 +91,10 @@ function getAttributionData(){
   localStorage.setItem("aryval-attribution", btoa(attData));
 
   return jsonAtt;
+}
+
+function hasPaidSearchWords(term){
+  return term && (term.includes('cpc')||term.includes('ppc')||term.includes('adwords')||term.includes('paidsearch'));
 }
 
 function getStoredAttData(){
