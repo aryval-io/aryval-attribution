@@ -36,7 +36,7 @@ function getAttributionData(){
   if(utm_medium && utm_medium.includes("email")){
     channel = 'Email Marketing';
   }
-  else if(params.get('fbclid') || utm_source == 'paidsocial' || 
+  else if(utm_source == 'paidsocial' || 
      (utm_medium && (utm_medium.includes('paid')|| utm_medium.includes('ppc')|| utm_medium.includes('cpc')) 
        && 
         (socials.includes(utm_source) || socials.includes(referrerName)))){
