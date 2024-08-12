@@ -42,7 +42,7 @@ function getAttributionData(){
     channel = 'Paid Social';
   }
   else if(params.get('msclkid') || params.get('gclid') ||
-     hasPaidSearchWords(utm_source) || hasPaidSearchWords(utm_medium) || hasPaidSearchWords(utm_campaign)
+     hasPaidSearchWords(utm_source) || hasPaidSearchWords(utm_medium) || hasPaidSearchWords(utm_campaign) ||
      ((utm_source || utm_medium || utm_term) && searchs.includes(referrerDomain))
     ){
     channel = "Paid Search";
