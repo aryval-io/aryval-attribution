@@ -36,13 +36,24 @@ function getAttributionData(){
   if(utm_medium && utm_medium.toLowerCase().includes("email")){
     channel = 'Email Marketing';
   }
+  else if(fbclid){
+    channel = 'Paid Social';
+    channeldrilldown1 = 'Facebook';
+  }
+  else if(msclkid){
+    channel = "Paid Search";
+    channeldrilldown1 = 'Bing';
+  }
+  else if(gclid){
+    channel = "Paid Search";
+    channeldrilldown1 = 'Google';
+  }
   else if(isPaidSocial(utm_source) || isPaidSocial(utm_medium) || 
      (isPaidMedium(utm_medium) && (socials.includes(utm_source) || socials.includes(referrerName)))
     ){
     channel = 'Paid Social';
   }
-  else if(params.get('msclkid') || params.get('gclid') ||
-     hasPaidSearchWords(utm_source) || hasPaidSearchWords(utm_medium) || hasPaidSearchWords(utm_campaign) ||
+  else if(hasPaidSearchWords(utm_source) || hasPaidSearchWords(utm_medium) || hasPaidSearchWords(utm_campaign) ||
      ((utm_source || utm_medium || utm_term) && searchs.includes(referrerDomain))
     ){
     channel = "Paid Search";
